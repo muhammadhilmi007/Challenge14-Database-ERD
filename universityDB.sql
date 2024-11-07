@@ -4,7 +4,7 @@ CREATE DATABASE university;
 -- Tabel Jurusan
 CREATE TABLE
     jurusan (
-        id INTEGER PRIMARY KEY AUTOINCEREMENT,
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         namajurusan TEXT NOT NULL
     );
 
@@ -20,15 +20,15 @@ CREATE TABLE
     -- Tabel Dosen
 CREATE TABLE
     dosen (
-        id INTEGER PRIMARY KEY AUTOINCEREMENT,
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         nama TEXT NOT NULL,
-        id_jurusan INTEGER,
-        FOREIGN KEY (id_jurusan) REFERENCES jurusan (id)
+        id_matakuliah INTEGER,
+        FOREIGN KEY (id_matakuliah) REFERENCES matakuliah (id)
     )
     -- Tabel Matakuliah
 CREATE TABLE
     matakuliah (
-        id INTEGER PRIMARY KEY AUTOINCEREMENT,
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         nama TEXT NOT NULL,
         sks INTEGER NOT NULL,
         id_dosen INTEGER,
@@ -55,11 +55,11 @@ VALUES
 
 -- Insert Data Dosen
 INSERT INTO
-    dosen (nama)
+    dosen (nama, id_matakuliah)
 VALUES
-    ('Dr. Arie'),
-    ('Dr. Andi'),
-    ('Dr. Andre');
+    ('Dr. Arie', 1),
+    ('Dr. Andi', 2),
+    ('Dr. Arie', 3);
 
 -- Insert Data Mahasiswa
 INSERT INTO
