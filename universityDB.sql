@@ -21,7 +21,9 @@ CREATE TABLE
 CREATE TABLE
     dosen (
         id INTEGER PRIMARY KEY AUTOINCEREMENT,
-        nama TEXT NOT NULL
+        nama TEXT NOT NULL,
+        id_jurusan INTEGER,
+        FOREIGN KEY (id_jurusan) REFERENCES jurusan (id)
     )
     -- Tabel Matakuliah
 CREATE TABLE
