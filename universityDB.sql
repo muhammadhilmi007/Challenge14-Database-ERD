@@ -21,18 +21,25 @@ CREATE TABLE
 CREATE TABLE
     dosen (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        nama TEXT NOT NULL,
-        id_matakuliah INTEGER,
-        FOREIGN KEY (id_matakuliah) REFERENCES matakuliah (id)
+        nama TEXT NOT NULL
     )
     -- Tabel Matakuliah
 CREATE TABLE
     matakuliah (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         nama TEXT NOT NULL,
-        sks INTEGER NOT NULL,
+        sks INTEGER NOT NULL
+    )
+    -- Tabel Many to Many Dosen-Matakuliah
+CREATE TABLE
+    dosen_matakuliah (
         id_dosen INTEGER,
-        FOREIGN KEY (id_dosen) REFERENCES dosen (id)
+        nama_dosen TEXT,
+        id_matakuliah INTEGER,
+        nama_matakuliah TEXT,
+        PRIMARY KEY (id_dosen, id_matakuliah),
+        FOREIGN KEY (id_dosen) REFERENCES dosen (id),
+        FOREIGN KEY (id_matakuliah) REFERENCES matakuliah (id)
     )
     -- Tabel Relasi Mahasiswa-Matakuliah
 CREATE TABLE
@@ -55,11 +62,11 @@ VALUES
 
 -- Insert Data Dosen
 INSERT INTO
-    dosen (nama, id_matakuliah)
+    dosen (nama)
 VALUES
-    ('Dr. Arie', 1),
-    ('Dr. Andi', 2),
-    ('Dr. Arie', 3);
+    ('Dr. Arie'),
+    ('Dr. Andi'),
+    ('Dr. Andre');
 
 -- Insert Data Mahasiswa
 INSERT INTO
@@ -71,11 +78,24 @@ VALUES
 
 -- Insert Data Matakuliah
 INSERT INTO
-    matakuliah (nama, sks, id_dosen)
+    matakuliah (nama, sks)
 VALUES
-    ('Basis Data', 3, 1),
-    ('Pemrograman Web', 4, 2),
-    ('Algoritma', 3, 3);
+    ('Basis Data', 3),
+    ('Pemrograman Web', 4),
+    ('Algoritma', 3);
+
+-- Insert Data Dosen_Matakuliah
+INSERT INTO
+    dosen_matakuliah (
+        id_dosen,
+        nama_dosen,
+        id_matakuliah,
+        nama_matakuliah
+    )
+VALUES
+    (1, 'Dr. Arie', 1, 'Basis Data'),
+    (1, 'Dr. Arie', 3, 'Algoritma'),
+    (2, 'Dr. Andi', 2, 'Pemrograman Web');
 
 -- Insert Data Mahasiswa_Matakuliah
 INSERT INTO
